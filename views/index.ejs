@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <title>Afghan Proverbs</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light" dir="rtl">
+  <div class="container mt-4">
+<form action="/search" method="GET" class="mb-4 d-flex">
+  <input type="text" name="q" placeholder="جستجو..." class="form-control me-2" required>
+  <button type="submit" class="btn btn-primary">🔍</button>
+</form>
+
+    <h1 class="mb-4 text-center"> لیست ضرب‌المثل‌ها</h1>
+
+<div class="mb-3">
+  <a href="/" class="btn btn-outline-secondary btn-sm">همه</a>
+  <a href="/category/wisdom" class="btn btn-outline-primary btn-sm">حکمت</a>
+  <a href="/category/friendship" class="btn btn-outline-success btn-sm">دوستی</a>
+  <a href="/category/family" class="btn btn-outline-danger btn-sm">خانواده</a>
+</div>
+    
+    <div class="d-flex justify-content-between mb-3">
+      <a href="/new" class="btn btn-success"> افزودن ضرب‌المثل</a>
+      <a href="/random" class="btn btn-warning"> ضرب‌المثل تصادفی</a>
+    </div>
+
+    <div class="row">
+      <% proverbs.forEach(proverb => { %>
+        <div class="col-md-6 mb-3">
+          <div class="card shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title"><%= proverb.textDari %></h5>
+              <h6 class="card-subtitle mb-2 text-muted"><%= proverb.textPashto %></h6>
+              <p class="card-text"><strong>ترجمه:</strong> <%= proverb.translationEn %></p>
+              <% let categories = proverb.category.split(','); %>
+                <% categories.forEach(cat => { %>
+                <span class="badge bg-info me-1"><%= cat.trim() %></span>
+                <% }) %>
+              <a href="/proverbs/<%= proverb.id %>" class="btn btn-outline-info btn-sm mt-2">مشاهده</a>
+            </div>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+</body>
+</html>
