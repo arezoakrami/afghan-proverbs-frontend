@@ -7,15 +7,16 @@ import { fileURLToPath } from 'url';
 
 const app = express();
 const PORT = process.env.PORT || 3001;
-const API_URL = 'http://localhost:3001/proverbs';
+const API_URL = 'http://localhost:3000/proverbs';
 
 //ES Modules in dirname
-const _filename = fileURLToPath(import.meta,url);
-const _Dirname = path.dirname(_filename);
+const __filename = fileURLToPath(import.meta.url);
+const __Dirname = path.dirname(__filename);
 
+//middle ware setup
 app.set('view engine', 'ejs');
-app.set('view', path.join(_dirname, 'views'));
-app.use (express.static('public'));
+app.set('views', path.join(__dirname, 'views'));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(methodoverride('_method'));
 
